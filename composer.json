@@ -1,0 +1,18 @@
+{
+  "name": "lonesimba/manychat-test",
+  "description": "Small app made for vacancy test",
+  "authors": [
+    {
+      "name": "Vladimir",
+      "email": "vovamaster99@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "8.1",
+    "ext-pdo": "*",
+    "vlucas/phpdotenv": "^5.4"
+  },
+  "autoload": {
+    "psr-4": {"App\\":  "app/"}
+  }
+}

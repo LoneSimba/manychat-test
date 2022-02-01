@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+
+  mariadb:
+    container_name: manychat.mariadb
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 'default'
+    ports:
+     - 3306:3306
+   
+  nginx:
+    container_name: manychat.nginx
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/var/www:delegated
