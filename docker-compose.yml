@@ -6,14 +6,17 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: 'default'
+      TZ: Europe/Moscow
     ports:
-     - 3306:3306
+     - "3306:3306"
    
   nginx:
     container_name: manychat.nginx
     build:
       context: .
+    environment:
+      TZ: Europe/Moscow
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./:/var/www:delegated

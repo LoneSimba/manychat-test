@@ -4,11 +4,12 @@ EXPOSE 8080
 
 COPY ./nginx-config.json ./docker-entrypoint.d/config.json
 
-RUN set -xe &&				                  \
-    timedatectl set-timezone Europe/Moscow
+RUN set -xe && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone
 
 RUN apt update &&                      \
-    apt install nano git libzip-dev -y 
+    apt install nano git libzip-dev -y
 
 RUN set -xe &&				                  \
     export DEBIAN_FRONTEND=noninteractive &&  \

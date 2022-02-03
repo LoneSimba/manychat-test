@@ -40,8 +40,23 @@ class Database implements IDatabase
         return new UpdateQuery($this->dbh, $table, $data);
     }
 
+    public function createTable(string $table): IQuery
+    {
+        return new CreateTable($this->dbh, $table);
+    }
+
     public function transaction(callable $callback)
     {
-        // TODO: Implement transaction() method.
+        try {
+            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->dbh->beginTransaction();
+
+            $result = $callback();
+            $this->dbh->commit();
+            return $result;
+        } catch (\Exception $e) {
+            $this->dbh->rollBack();
+            return null;
+        }
     }
 }
